@@ -1,0 +1,45 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+class Chatbot {
+public:
+    void start() {
+        std::cout << "Chatbot is ready to talk! Type 'bye' to exit." << std::endl;
+        std::string user_input;
+
+        while (true) {
+            std::cout << "You: ";
+            std::getline(std::cin, user_input);
+            if (user_input == "bye") {
+                std::cout << "Chatbot: Goodbye! Have a great day!" << std::endl;
+                break;
+            }
+            std::string response = process_input(user_input);
+            std::cout << "Chatbot: " << response << std::endl;
+        }
+    }
+
+private:
+    std::string process_input(const std::string& input) {
+        std::string lower_input = input;
+        std::transform(lower_input.begin(), lower_input.end(), lower_input.begin(), ::tolower);
+
+        if (lower_input.find("hello") != std::string::npos) {
+            return "Hello! How can I assist you today?";
+        } else if (lower_input.find("how are you") != std::string::npos) {
+            return "I'm just a computer program, but thanks for asking!";
+        } else if (lower_input.find("what is ai") != std::string::npos) {
+            return "Artificial Intelligence (AI) is the simulation of human intelligence in machines.";
+        } else {
+            return "I'm not sure how to respond to that.";
+        }
+    }
+};
+
+int main() {
+    Chatbot bot;
+    bot.start();
+    return 0;
+}
